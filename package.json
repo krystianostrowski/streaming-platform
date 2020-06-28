@@ -1,0 +1,27 @@
+{
+  "name": "streaming-platform",
+  "version": "0.0.1",
+  "description": "home video streaming platform",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/krystianostrowski/streaming-platform.git"
+  },
+  "author": "Krystian Ostrowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/krystianostrowski/streaming-platform/issues"
+  },
+  "homepage": "https://github.com/krystianostrowski/streaming-platform#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
