@@ -1,5 +1,3 @@
-const { apiResolver } = require('next/dist/next-server/server/api-utils');
-
 const app = require('express')();
 const port = 3001;
 
