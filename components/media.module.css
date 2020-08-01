@@ -1,0 +1,14 @@
+.mediaContainer {
+    width: 300px;
+    height: 250px;
+    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.poster {
+    height: 100%;
+    margin: auto;
+}

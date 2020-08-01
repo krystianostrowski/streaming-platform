@@ -1,28 +1,11 @@
-import NavigationTemplate from '../templates/navigationTemplate'
-
-function HomePage({videos}) 
-{
-    return (
-        <>
-            <NavigationTemplate />
-            <ul>
-                {videos.map((video) => (
-                    <li>{video.title}</li>
-                ))}
-            </ul>
-        </>
+const Login = () => {
+    return(
+        <form method="POST" action="/login">
+            <input type="text" name="login" />
+            <input type="password" name="password" />
+            <input type="submit" />
+        </form>
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch('http://127.0.0.1:3001/api/videos');
-    const videos = await res.json();
-
-    return {
-        props: {
-            videos,
-        },
-    }
-}
-
-export default HomePage
+export default Login

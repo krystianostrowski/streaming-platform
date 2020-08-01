@@ -1,14 +1,28 @@
 import styles from './nav.module.css'
 
-function Nav()
+function Nav(props)
 {
-    return(
-        <ul className={styles.nav}>
-            <li>Main</li>
-            <li>Secondary</li>
-            <li>Other</li>
-        </ul>
-    )
+    if(props.isLogged)
+    {
+        return(
+            <ul className={styles.nav}>
+                <li><a href="/">Main</a></li>
+                <li><a href="/logout">Logout</a></li>
+                <li>{props.user.login}</li>,
+                <li>Other</li>
+            </ul>
+        )
+    }
+    else
+    {
+        return(
+            <ul className={styles.nav}>
+                <li><a href="/">Main</a></li>
+                <li><a href="/login">LogIn</a></li>
+                <li>Other</li>
+            </ul>
+        )
+    }
 }
 
 export default Nav

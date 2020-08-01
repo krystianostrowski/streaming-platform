@@ -3,6 +3,12 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-    background-color: red;
+    background-color: #212121;
     box-sizing: border-box;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    justify-content: space-around;
 }
