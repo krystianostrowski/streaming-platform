@@ -1,0 +1,15 @@
+.wrapper {
+    padding: 15px 25px;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, .15);  
+    text-align: center;
+}
+
+.wrapper p {
+    position: relative;
+    color: rgba(255, 255, 255, .9);
+    text-transform: uppercase;
+}

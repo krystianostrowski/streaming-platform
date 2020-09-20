@@ -1,6 +1,5 @@
-const express = require('express')
+const express = require('express');
 const next = require('next');
-const fs = require('fs');
 const uuid = require('uuid').v4;
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -8,39 +7,20 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const usersAPI = require('./API/usersAPI');
-const { query } = require('express');
+const { Release } = require('./API/mediaAPI');
+const cron = require('node-cron');
+//const bcrypt = require('bcrypt');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();
-const port = 3001;
+const port = 3000;
 
-//console.log(usersAPI.VerifyPassword("0", 'dev'));
+const MAX_COOKIE_AGE = 1000 * 60 * 60;
 
-const media = [
-    {
-        title: "Dream of You",
-        author: "Anne",
-        type: "music",
-        poster: "posters/AlbumCover.jpg"
-    },
-    {
-        title: "Dream of You vid",
-        author: "Anne",
-        type: "video",
-        poster: "posters/AlbumCover.jpg"
-    },
-    {
-        title: "The Way I Fell For You",
-        author: "Anne",
-        type: "music",
-        poster: "posters/AlbumCover.jpg"
-    },
-]
+//console.log(bcrypt.hashSync('dev', 10));
 
-const users = [
-    {id: '0', login: 'dev', password: 'dev'}
-]
+cron.schedule('0 0 * * *', () => { Release() });
 
 passport.use(new LocalStrategy(
     { usernameField: 'login' },
@@ -76,127 +56,25 @@ app.prepare().then(() => {
         genid: (req) => {
             return uuid();
         },
+        name: 'loginSession',
         store: new FileStore(),
-        secret: 'AnneMunition',
+        secret: "Z!.pr;![8tA9hyJ8kN?4#&(g*K_'63Td",
+        rolling: true,
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {
-            maxAge: 500000
+            maxAge: MAX_COOKIE_AGE
         }
     }));
     server.use(passport.initialize());
     server.use(passport.session());
 
-    server.get('/', (req, res) => {
-        if(req.isAuthenticated())
-        {
-            res.redirect('/browse');
-        }
-
-        handle(req, res);
-    });
-
-    server.get('/browse', (req, res) => {
-        const isLoggedIn = req.isAuthenticated();
-        const queryParams = {loggedIn: isLoggedIn};
-
-        if(isLoggedIn)
-        {
-            queryParams.user = req.user;
-            app.render(req, res, '/browse', queryParams);
-        }
-        else
-        {
-            res.redirect('/');
-        }
-
-    });
-
-    server.get('/login', (req, res) => {
-        handle(req, res);
-    });
-
-    server.post('/login', (req, res) => {
-        passport.authenticate('local', (err, user, info) => {
-            req.login(user, err => {
-                res.redirect('/browse');
-            })
-        })(req, res, next);
-    });
-
-    server.get('/logout', (req, res) => {
-        req.logout();
-        res.redirect('/');
-    });
-
-    server.get('/api/media', (req, res) => {
-        res.send(media);
-    });
-
-    server.get('/player/:title', (req, res) => {
-        if(!req.isAuthenticated())
-            res.redirect('/');
-
-        const page = '/player';
-        let index = null;
-
-        for(let m of media)
-        {
-            if(m.title === req.params.title)
-                index = media.indexOf(m);
-        }
-
-        const queryParams = (index != null) ? media[index] : media[0]; 
-        queryParams.loggedIn = true;
-        app.render(req, res, page, queryParams);
-    });
-
-    server.get('/play/:title', (req, res) => {
-        if(!req.isAuthenticated())
-            res.redirect('/');
-
-        const title = req.params.title.replace(/\s/g, '')
-        const path = `./media/${title}`;
-        const stat = fs.statSync(path);
-        const fileSize = stat.size;
-        const range = req.headers.range;
-
-        //console.log(req.headers.range);
-
-        if(range) {
-            const parts = range.replace(/bytes=/, "").split("-");
-            const start = parseInt(parts[0], 10);
-            const end = parts[1] ? parseInt(parts[1], 10) : fileSize - 1;
-            const chunkSize = (end - start) + 1;
-            const file = fs.createReadStream(path, { start, end });
-            const head = {
-                'Content-Range': `bytes ${start}-${end}/${fileSize}`,
-                'Accept-Ranges': `bytes`,
-                'Content-Length': chunkSize,
-                'Content-Type': 'audio/mpeg',
-            }
-            console.log("object");
-            res.writeHead(206, head);
-            file.pipe(res);
-        }
-        else
-        {
-            // const head = {
-            //     'Content-Length': fileSize,
-            //     'Content-Type': 'audio/mpeg',
-            // }
-            // res.writeHead(200, head);
-            // fs.createReadStream(path).pipe(res);
-            //app.render(req, res, '/player', {});
-            res.redirect('/player/' + req.params.title);
-        }
-    });
+    require('./routes/pages')(server, handle, passport, next, app);
+    require('./routes/apiRoutes')(server, app);
 
     server.get('*', (req, res) => {
         return handle(req, res);
     });
-
-    //server.use(express.static('public'));
 
     server.listen(port, err => {
         if(err)

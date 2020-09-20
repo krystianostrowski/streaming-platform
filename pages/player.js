@@ -1,14 +1,25 @@
-import NavigationTemplate from '../templates/navigationTemplate'
-import MediaPlayer from '../components/mediaPlayer'
+import Nav from '../components/nav/nav';
+import MediaPlayer from '../components/mediaPlayer/mediaPlayer';
+import MediaInfo from '../components/MediaInfo/MediaInfo';
+import InProgress from '../components/InProgress/InProgress'
+
+const OnChange = e => {
+    const str = e.target.value;
+    console.log(str);
+    const json = JSON.parse(str);
+    console.log(json);
+}
 
 function Player({media})
 {
     return (
         <>
-            <NavigationTemplate isLogged={media.loggedIn} />
-            <MediaPlayer title={media.title} type ={media.type} poster={media.poster} />
-            <h1>{media.title}</h1>
-            {media.author}
+            <InProgress />
+            <Nav user={media.user}/>
+            <div className="wrapper">
+                <MediaPlayer id={media.id} type ={media.type} poster={media.poster} />
+                <MediaInfo media={media} />
+            </div>
         </>
     )
 }

@@ -1,0 +1,172 @@
+.navWrapper {
+    height: 100vh;
+    width: 40%;
+    position: absolute;
+    z-index: 99;
+    background: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translate(-110%);
+    transition: transform .15s ease-in-out;
+    box-shadow: 4px 0px 4px 0px rgba(0,0,0,0.75);
+}
+
+.button {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    padding: 10px;
+    border-radius: 50%;
+    z-index: 100;
+    background: none;
+    border: none;
+}
+
+.hamburger {
+    position: relative;
+    width: 20px;
+    height: 2px;
+    background: #ffffff;
+    left: 0;
+    transition: background .1s ease-in-out;
+    transition-delay: .2s;
+}
+
+.hamburger::before,
+.hamburger::after {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 2px;
+    background: #ffffff;
+    left: 0;
+}
+
+.hamburger::before {
+    top: -6px;
+    transform: translateY(0) rotate(0);
+    transition: transform .2s ease-in-out;
+}
+
+.hamburger::after {
+    top: 6px;
+    transform: translateY(0) rotate(0);
+    transition: transform .2s ease-in-out;
+}
+
+.buttonActive .hamburger {
+    background: transparent;
+    transition: background .1s ease-in-out;
+}
+
+.buttonActive .hamburger::before {
+    transform-origin: 50%;
+    transform: translateY(6px) rotate(45deg);
+    transition: transform .2s ease-in-out;
+    transition-delay: .1s;
+}
+
+.buttonActive .hamburger::after {
+    transform-origin: 50%;
+    transform: translateY(-6px) rotate(-45deg);
+    transition: transform .2s ease-in-out;
+    transition-delay: .1s;
+}
+
+.navOpen {
+    transform: translate(0);
+    transition: transform .15s ease-in-out;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav a,
+.nav span {
+    display: flex;
+    width: 100%;
+    height: 75px;
+    text-decoration: none;
+    color: #ffffff;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav span {
+    height: 75px;
+}
+
+.nav li {
+    display: block;
+    width: 100%;
+    min-height: 75px;
+    position: static;
+}
+
+.nav li:hover {
+    background: #222;
+}
+
+.submenu {
+    position: static;
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.submenuOpen {
+    display: block;
+    position: relative;
+    z-index: 10;
+    background: #222;
+}
+
+.submenuOpen li {
+    display: block;
+}
+
+.blur {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100vh;
+    background: rgba(255, 255, 255, .3);
+    z-index: 98;
+    transform: translate(100%);
+    transition: all .2s ease-in-out;
+}
+
+.blurActive {
+    transform: translate(0);
+    transition: all .2s ease-in-out;
+}
+
+@media only screen and (max-width: 780px)
+{
+    .blur {
+        display: none;
+    }
+
+    .navWrapper {
+        width: 100vw;
+    }
+}
+
+/*ul.nav > li:hover .submenu {
+    position: absolute;
+    display: block;
+}*/

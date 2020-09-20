@@ -1,10 +1,14 @@
 const Login = () => {
     return(
-        <form method="POST" action="/login">
-            <input type="text" name="login" />
-            <input type="password" name="password" />
-            <input type="submit" />
-        </form>
+        <div className="container">
+            <div className="loginForm__wrapper">
+                <form method="POST" action="/login">
+                    <input type="text" name="login" placeholder="Login" />
+                    <input type="password" name="password" placeholder="Password" />
+                    <button type="submit">Log In</button>
+                </form>
+            </div>
+        </div>
     )
 }
 

@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     width: 100vw;
     min-height: 100vh;
@@ -6,9 +14,84 @@ body {
     background-color: #212121;
     box-sizing: border-box;
     color: #fff;
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.page-wrapper {
+    width: 100%;
+    max-width: 100vw;
+    min-height: 100vh;
+}
+
+.wrapper {
+    width: 100vw;
+    height: 100vh;
+    padding: 50px 100px;
 }
 
 .container {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 50px 100px;
 }
+
+/*.play-pause__button,
+.mute__button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: 10px;
+}
+
+.play-pause__button:hover,
+.mute__button:hover {
+    background: #ddd;
+}*/
+
+.loginForm__wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    justify-content: center;
+}
+
+.loginForm__wrapper input {
+    display: block;
+    margin-bottom: 25px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #1DB954;
+    color: #fff;
+    text-align: center;
+}
+
+.loginForm__wrapper button {
+    display: block;
+    margin: auto;
+}
+
+/*input[type=range] {
+    -webkit-appearance: none;
+    width: 180px;
+    background: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8px;
+    background: #796456;
+    border: rgba(1, 1, 1, 0);
+}
+
+input[type=range]::-webkit-slider-thumb {
+    height: 20px;
+    width: 10px;
+    background: #eee;
+}*/

@@ -1,0 +1,18 @@
+.MediaPlayer {
+    width: 75%;
+}
+
+.musicPalyer {
+    width: 800px;
+    height: 800px;
+    margin: auto;
+    position: relative;
+}
+
+.musicPalyer img {
+    width: 100%;
+} 
+
+.videoPlayer {
+    width: 100%;
+}

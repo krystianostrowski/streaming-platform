@@ -1,5 +1,6 @@
 const fs = require('fs');
 const Permissions = require('./userPermission');
+const bcrypt = require('bcrypt');
 
 const usersDBPath = './db/users.json';
 
@@ -44,6 +45,7 @@ const SearchUserByID = id => {
             const userData = {
                 id: user.id,
                 login: user.login,
+                lv: user.permission
             };
             
             return userData;
@@ -58,7 +60,7 @@ const VerifyPassword = (userID, password) => {
     {
         if(user.id == userID)
         {
-            if(user.password == password)
+            if(bcrypt.compareSync(password, user.password))
             {
                 return true;
             }
@@ -87,7 +89,9 @@ const RemoveUser = id => {
 };
 
 const GetPermissionLvl = id => {
+    const user = SearchUserByID(id);
 
+    return user.lv;
 };
 
 const SetPermissionLvl = id => {
@@ -98,6 +102,7 @@ module.exports = {
     GetData,
     SearchUserByName,
     SearchUserByID,
-    VerifyPassword
+    VerifyPassword,
+    GetPermissionLvl
 } 
     

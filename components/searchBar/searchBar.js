@@ -18,7 +18,7 @@ function SearchBar()
 {
     return(
         <div className={styles.searchWrapper}>
-            <input onInput={(e) => searchBarInput(e)}></input>
+            <input disabled onInput={(e) => searchBarInput(e)}></input>
             <div className={styles.searchBtn}></div>
         </div>
     )

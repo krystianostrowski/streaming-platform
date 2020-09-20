@@ -2,13 +2,25 @@
     {
         "id": "0",
         "login": "dev",
-        "password": "dev",
+        "password": "$2b$10$kOHxWiJIxFJMGG6byDYUXOpHZu/BcZYefVsd5QrLx1/IhZ.qO46iy",
         "permission": 2
     },
     {
         "id": "1",
         "login": "mod",
         "password": "mod",
-        "permission": 1
+        "permission": 0
+    },
+    {
+        "id": "2",
+        "login": "krystianostrowski",
+        "password": "$2b$10$kOHxWiJIxFJMGG6byDYUXOpHZu/BcZYefVsd5QrLx1/IhZ.qO46iy",
+        "permission": 2
+    },
+    {
+        "id": "3",
+        "login": "tester",
+        "password": "09iUwg",
+        "permission": 0
     }
 ]

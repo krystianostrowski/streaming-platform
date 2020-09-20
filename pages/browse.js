@@ -1,36 +1,24 @@
-import NavigationTemplate from '../templates/navigationTemplate'
-import Media from '../components/media'
+import Nav from '../components/nav/nav'
+import Media from '../components/media/media'
+import InProgress from '../components/InProgress/InProgress';
 
 function HomePage({media, user}) 
 {
-    if(user.loggedIn)
-    {
-        return (
-            <>
-                <NavigationTemplate isLogged={user.loggedIn} user={user.user} />
-                <div className="container">
-                    {media.map((m) => (
-                        <Media key={m.title} title={m.title} author={m.author} type={m.type} poster={m.poster} />
-                    ))}
-                </div>
-            </>
-        )
-    }
-    else
-    {
-        return (
-            <>
-                <NavigationTemplate isLogged={user.loggedIn}/>
-                <div className="container">
-                    <h1>You have to be logged in to see the content</h1>
-                </div>
-            </>
-        )
-    }
+    return (
+        <div className="page-wrapper">
+            <Nav user={user.user} />
+            <InProgress />
+            <div className="container">
+                {media.length > 0 ? media.map((m) => (
+                    <Media key={m.id} media={m} />
+                )) : <h1>Nothing was found!</h1>}
+            </div>
+        </div>
+    )
 }
 
 HomePage.getInitialProps = async ({query: user}) => {
-    const res = await fetch('http://127.0.0.1:3001/api/media');
+    const res = await fetch('http://127.0.0.1:3000/api/media');
     const media = await res.json();
     return {user, media}
 }
