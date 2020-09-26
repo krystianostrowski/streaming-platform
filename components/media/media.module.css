@@ -1,0 +1,43 @@
+.mediaContainer {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.mediaLink,
+.mediaOverlay {
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.mediaOverlay {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0, .7);
+}
+
+.mediaLink span {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+}
+
+.poster {
+    width: 300px;
+    height: 300px;
+    margin: auto;
+}
