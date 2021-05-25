@@ -1,2 +1,1 @@
-# streaming-platform
-Home video streaming platform
+Video streaming platform for my media server
